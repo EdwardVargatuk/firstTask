@@ -36,9 +36,12 @@ public class GuessChar {
             case 2:
                 System.out.println("Too high!" + " Plese enter another one");
                 break;
-            case 0:
+            case 3:
                 System.out.println("Please enter latin letter");
                 break;
+                default:
+                    break;
+
         }
     }
 
@@ -47,6 +50,8 @@ public class GuessChar {
             return 1;
         else if (chrPlayer > chrRandom && chrPlayer <= 122)
             return 2;
+        else if (chrPlayer != chrRandom)
+            return 3;
         else return 0;
     }
 
