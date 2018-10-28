@@ -46,9 +46,9 @@ public class GuessChar {
     }
 
     public int compareChar(char chrPlayer, char chrRandom) {
-        if (chrPlayer < chrRandom && chrPlayer >= 97)
+        if (chrPlayer < chrRandom && chrPlayer >= 'a')
             return 1;
-        else if (chrPlayer > chrRandom && chrPlayer <= 122)
+        else if (chrPlayer > chrRandom && chrPlayer <= 'z')
             return 2;
         else if (chrPlayer != chrRandom)
             return 3;
