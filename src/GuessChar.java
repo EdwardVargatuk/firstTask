@@ -28,22 +28,25 @@ public class GuessChar {
         }
     }
 
-    public void outputFromCompareChar(int i) {
+    public String outputFromCompareChar(int i) {
         switch (i) {
             case 1:
-                System.out.println("Too low!" + " Plese enter another one");
-                break;
+                String str1="Too low!" + " Please enter another one";
+                System.out.println(str1);
+                return str1;
             case 2:
-                System.out.println("Too high!" + " Plese enter another one");
-                break;
+                String str2="Too high!" + " Please enter another one";
+                System.out.println(str2);
+                return str2;
             case 3:
-                System.out.println("Please enter latin letter");
-                break;
+                String str3="Please enter latin letter";
+                System.out.println(str3);
+                return str3;
                 default:
                     break;
 
         }
-    }
+    return "";}
 
     public int compareChar(char chrPlayer, char chrRandom) {
         if (chrPlayer < chrRandom && chrPlayer >= 'a')
