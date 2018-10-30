@@ -1,9 +1,13 @@
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,45 +22,34 @@ class GuessCharTest {
 
     @Test
     void testToGetRandomChar() {
-        char a = gs.getRandomChar();
-        assertTrue(a >= 'a');
-        assertTrue(a <= 'z');
-        assertFalse(a > 122, "a not in bounds");
-        assertNotNull(a);
-//        assertDoesNotThrow((Executable) new IOException());
+        List<Character> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            char randomChar = gs.getRandomChar();
+            list.add(randomChar);
+        }
+        assertTrue(list.contains('a'));
+        assertTrue(list.contains('z'));
+        assertFalse(list.contains('A'));
+        assertNotNull(list);
     }
 
-
+    @Ignore
     @Test
     void testIsShouldThrowExceptionReadFromConsole() {
-        Executable executable = () -> {
-            throw new IOException("message");
-        };
-        assertThrows(IOException.class, executable, "d");
         Throwable exception = assertThrows(IndexOutOfBoundsException.class, () -> {
             throw new IndexOutOfBoundsException("\nPlease enter something\n");
-//            char a = (char) gs.readFromConsole();
         });
         assertEquals("\nPlease enter something\n", exception.getMessage());
     }
 
-
-    @Test
-    void testCompareCharForConditions() {
-        char a = 'a';
-        char b = 'd';
-        char notLatin = '5';
-        char ukrainianChar = 'ю';
-        int i = gs.compareChar(a, b);
-        assertEquals(1, i);
-        i = gs.compareChar(b, a);
-        assertEquals(2, i);
-        i = gs.compareChar(a, a);
-        assertEquals(0, i);
-        i = gs.compareChar(notLatin, b);
-        assertEquals(3, i);
-        i = gs.compareChar(ukrainianChar, b);
-        assertEquals(3, i);
+    @ParameterizedTest
+    @CsvSource(value = {"j, a, 2",
+            "a, j, 1",
+            "5, j, 3",
+            "ю, j, 3",
+            "k, k, 0"})
+    void testCompareCharForConditions(char pass_val, char pass_val2, int expected_res) {
+        assertEquals(expected_res, gs.compareChar(pass_val, pass_val2));
 
     }
 
@@ -69,5 +62,6 @@ class GuessCharTest {
         s = gs.outputFromCompareChar(i);
         assertEquals("Please enter latin letter", s);
     }
+
 
 }

@@ -10,7 +10,7 @@ public class GuessChar {
 
     public char getRandomChar() {
         char randomChar = (char) (rand.nextInt(26) + 'a');
-        System.out.println(randomChar);
+//        System.out.println(randomChar);
         return randomChar;
     }
 
@@ -49,9 +49,9 @@ public class GuessChar {
     return "";}
 
     public int compareChar(char chrPlayer, char chrRandom) {
-        if (chrPlayer < chrRandom && chrPlayer >= 'a')
+        if (chrPlayer < chrRandom & chrPlayer >= 'a')
             return 1;
-        else if (chrPlayer > chrRandom && chrPlayer <= 'z')
+        else if (chrPlayer > chrRandom & chrPlayer <= 'z')
             return 2;
         else if (chrPlayer != chrRandom)
             return 3;
